@@ -1,0 +1,45 @@
+<html>
+<head>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"></link>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g=" crossorigin="anonymous"></script>
+    <script type='text/javascript'>
+        const data = [
+            {task: "task 1"},
+            {task: "task 2"},
+            {task: "task 3"},
+            {task: "task 4"},
+            {task: "task 5"}
+        ]
+    </script>
+</head>
+<body class='container-fluid'>
+    <h1>Todo List (Jquery)</h1>
+    <div class='pure-g'>
+        <input type='text' id='todo' placeholder="put in todo here"/>
+        <button class='btn btn-default' onClick="addTodo()"><i class="fa fa-plus"></i></button>
+    </div>
+    <div id="todoList" class='pure-g'/>
+    <script type='text/javascript'>
+        function addTodo() {
+            data.push({task :$("#todo").val()});
+            $("#todo").val("");
+            clearTodoList();
+            createTodoListFromData(data);
+        }
+        function deleteTodo(index) {
+            data.splice(index, 1)
+            clearTodoList();
+            createTodoListFromData(data);
+        }
+        function clearTodoList() {
+            $("#todoList").html("");
+        }
+        function createTodoListFromData(data) {
+            for (var i = 0; i < data.length; i++) {
+                $("#todoList").append("<div class='pure-u-1-5'><span>"+data[i].task +"</span><button class='btn btn-danger' onclick='deleteTodo("+i+")'><i class='fa fa-minus'></button></div>")
+            }
+        }
+        createTodoListFromData(data);
+    </script>
+</body>
+</html>
